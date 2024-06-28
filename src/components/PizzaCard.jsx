@@ -1,17 +1,20 @@
-function PizzaCard({ image, title, type, size, price }) {
+function PizzaCard({ image, title, types, sizes, price }) {
+  const pizzaType = ['тонкое', 'традиционное'];
+
   return (
     <div className="pizza-block">
       <img className="pizza-block__image" src={image} alt="Pizza" />
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          <li className="active">тонкое</li>
-          <li>традиционное</li>
+          {types.map((type) => (
+            <li className="active">{pizzaType[type]}</li>
+          ))}
         </ul>
         <ul>
-          <li className="active">26 см.</li>
-          <li>30 см.</li>
-          <li>40 см.</li>
+          {sizes.map((el) => (
+            <li className="active">{el} см.</li>
+          ))}
         </ul>
       </div>
       <div className="pizza-block__bottom">
