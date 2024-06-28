@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function PizzaCard({ imageUrl, title, types, sizes, price }) {
+function PizzaCard({ imageUrl, title, types, sizes, price, ...obj }) {
   const [activePizzaType, setActivePizzaType] = useState(0);
   const [activePizzaSize, setActivePizzaSize] = useState(0);
   const pizzaType = ['тонкое', 'традиционное'];
@@ -11,8 +11,9 @@ function PizzaCard({ imageUrl, title, types, sizes, price }) {
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          {types.map((type) => (
+          {types.map((type, index) => (
             <li
+              key={index}
               onClick={() => setActivePizzaType(type)}
               className={type === activePizzaType ? 'active' : null}>
               {pizzaType[type]}
@@ -22,6 +23,7 @@ function PizzaCard({ imageUrl, title, types, sizes, price }) {
         <ul>
           {sizes.map((el, index) => (
             <li
+              key={index}
               onClick={() => setActivePizzaSize(index)}
               className={activePizzaSize === index ? 'active' : null}>
               {el} см.

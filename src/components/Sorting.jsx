@@ -1,4 +1,15 @@
+import { useState } from 'react';
+
 function Sorting() {
+  const [modalActive, setModalActive] = useState(false);
+  const [sortElemActive, setsortElemActive] = useState(0);
+  const sortList = ['популярности', 'цене', 'алфавиту'];
+
+  const selectElemList = (index) => {
+    setsortElemActive(index);
+    setModalActive(false);
+  };
+
   return (
     <div className="sort">
       <div className="sort__label">
@@ -6,6 +17,7 @@ function Sorting() {
           width="10"
           height="6"
           viewBox="0 0 10 6"
+          style={{ transform: modalActive ? 'scale(1, -1)' : 'none' }}
           fill="none"
           xmlns="http://www.w3.org/2000/svg">
           <path
@@ -14,15 +26,24 @@ function Sorting() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span>популярности</span>
+        <span onClick={() => setModalActive(!modalActive)}>популярности</span>
       </div>
-      <div className="sort__popup">
-        <ul>
-          <li className="active">популярности</li>
-          <li>цене</li>
-          <li>алфавиту</li>
-        </ul>
-      </div>
+      {modalActive ? (
+        <div className="sort__popup">
+          <ul>
+            {sortList.map((el, index) => (
+              <li
+                key={index}
+                onClick={() => selectElemList(index)}
+                className={sortElemActive === index ? 'active' : null}>
+                {el}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 }
