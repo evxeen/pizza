@@ -21,11 +21,16 @@ function Sorting() {
   };
 
   useEffect(() => {
-    document.body.addEventListener('click', (event) => {
+    const handler = (event) => {
       if (!event.composedPath().includes(sortRef.current)) {
         setModalActive(false);
       }
-    });
+    };
+    document.body.addEventListener('click', handler);
+
+    return () => {
+      document.body.removeEventListener('click', handler);
+    };
   }, []);
 
   return (

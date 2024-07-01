@@ -1,9 +1,27 @@
 import { useState } from 'react';
+import {useDispatch, useSelector } from 'react-redux';
 
-function PizzaCard({ imageUrl, title, types, sizes, price, ...obj }) {
+import { addItem } from '../state/slices/cartSlice';
+
+function PizzaCard({ imageUrl, title, types, sizes, price, id }) {
+  const dispatch = useDispatch();
   const [activePizzaType, setActivePizzaType] = useState(0);
   const [activePizzaSize, setActivePizzaSize] = useState(0);
   const pizzaType = ['тонкое', 'традиционное'];
+
+
+  const addToCart = () => {
+    const newItem = {
+      imageUrl,
+      title,
+      price,
+      id,
+      type: activePizzaType,
+      size: activePizzaSize,
+    };
+
+    dispatch(addItem(newItem))
+  };
 
   return (
     <div className="pizza-block-wrapper">
@@ -34,7 +52,7 @@ function PizzaCard({ imageUrl, title, types, sizes, price, ...obj }) {
         </div>
         <div className="pizza-block__bottom">
           <div className="pizza-block__price">от {price} ₽</div>
-          <button className="button button--outline button--add">
+          <button onClick={addToCart} className="button button--outline button--add">
             <svg
               width="12"
               height="12"
@@ -47,7 +65,7 @@ function PizzaCard({ imageUrl, title, types, sizes, price, ...obj }) {
               />
             </svg>
             <span>Добавить</span>
-            <i>2</i>
+            <i>0</i>
           </button>
         </div>
       </div>
