@@ -1,12 +1,21 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { setSortType } from '../state/slices/filterSlice';
 
 function Sorting() {
-  const [modalActive, setModalActive] = useState(false);
-  const [sortElemActive, setsortElemActive] = useState(0);
-  const sortList = ['популярности', 'цене', 'алфавиту'];
+  const dispatch = useDispatch();
+  const sort = useSelector((state) => state.filterSlice.sort);
 
-  const selectElemList = (index) => {
-    setsortElemActive(index);
+  const [modalActive, setModalActive] = useState(false);
+  const sortList = [
+    { name: 'популярности', property: 'rating' },
+    { name: 'цене', property: 'price' },
+    { name: 'алфавиту', property: 'title' },
+  ];
+
+  const selectElemList = (obj) => {
+    dispatch(setSortType(obj));
     setModalActive(false);
   };
 
@@ -34,9 +43,9 @@ function Sorting() {
             {sortList.map((el, index) => (
               <li
                 key={index}
-                onClick={() => selectElemList(index)}
-                className={sortElemActive === index ? 'active' : null}>
-                {el}
+                onClick={() => selectElemList(el)}
+                className={el.name === sort.name ? 'active' : null}>
+                {el.name}
               </li>
             ))}
           </ul>

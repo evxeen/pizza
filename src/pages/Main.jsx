@@ -5,7 +5,6 @@ import Sorting from '../components/Sorting';
 import PizzaCard from '../components/PizzaCard';
 
 function Main() {
-  
   const [data, setData] = useState([]);
 
   useEffect(() => {
