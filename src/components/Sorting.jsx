@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setSortType } from '../state/slices/filterSlice';
@@ -8,6 +8,7 @@ function Sorting() {
   const sort = useSelector((state) => state.filterSlice.sort);
 
   const [modalActive, setModalActive] = useState(false);
+  const sortRef = useRef();
   const sortList = [
     { name: 'популярности', property: 'rating' },
     { name: 'цене', property: 'price' },
@@ -19,8 +20,16 @@ function Sorting() {
     setModalActive(false);
   };
 
+  useEffect(() => {
+    document.body.addEventListener('click', (event) => {
+      if (!event.composedPath().includes(sortRef.current)) {
+        setModalActive(false);
+      }
+    });
+  }, []);
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           width="10"

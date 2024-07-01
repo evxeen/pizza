@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import Categories from '../components/Categories';
 import Sorting from '../components/Sorting';
@@ -8,11 +9,11 @@ function Main() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch('https://667f0707f2cb59c38dc7d61e.mockapi.io/items')
-      .then((res) => res.json())
-      .then((data) => setData(data))
-      .catch((error) => console.error('Error:', error));
+    axios.get('https://667f0707f2cb59c38dc7d61e.mockapi.io/items').then((res) => {
+      setData(res.data);
+    });
   }, []);
+
   return (
     <>
       <div className="content__top">
