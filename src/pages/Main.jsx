@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+
 import Categories from '../components/Categories';
 import Sorting from '../components/Sorting';
 import PizzaCard from '../components/PizzaCard';
 
 function Main() {
+  
   const [data, setData] = useState([]);
 
   useEffect(() => {
