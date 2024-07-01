@@ -19,7 +19,7 @@ function PizzaCard({imageUrl, title, types, sizes, price, id}) {
             price,
             id,
             type: pizzaType[activePizzaType],
-            size: activePizzaSize,
+            size: sizes[activePizzaSize],
         };
 
         dispatch(addItem(newItem))
