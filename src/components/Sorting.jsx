@@ -6,7 +6,6 @@ import {setSortType} from '../state/slices/filterSlice';
 function Sorting() {
     const dispatch = useDispatch();
     const sort = useSelector((state) => state.filterSlice.sort);
-
     const [modalActive, setModalActive] = useState(false);
     const sortRef = useRef();
     const sortList = [

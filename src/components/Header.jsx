@@ -6,7 +6,6 @@ import logoType from '../assets/images/pizza-logo.svg';
 
 function Header() {
     const {totalPrice, items} = useSelector((state) => state.cartSlice);
-
     const totalCount = items.reduce((total, item) => total + item.count, 0);
 
 

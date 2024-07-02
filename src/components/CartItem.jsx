@@ -31,8 +31,8 @@ function CartItem({imageUrl, title, type, size, price, id, count}) {
                 <p>{type}, {size} см.</p>
             </div>
             <div className="cart__item-count">
-                {count ? <div onClick={minusItem}
-                              className="button button--outline button--circle cart__item-count-minus">
+                <button disabled={count === 1} onClick={minusItem}
+                        className="button button--outline button--circle cart__item-count-minus">
                     <svg
                         width="10"
                         height="10"
@@ -48,9 +48,9 @@ function CartItem({imageUrl, title, type, size, price, id, count}) {
                             fill="#EB5A1E"
                         />
                     </svg>
-                </div> : "❌"}
+                </button>
                 <b>{count}</b>
-                <div onClick={add} className="button button--outline button--circle cart__item-count-plus">
+                <button onClick={add} className="button button--outline button--circle cart__item-count-plus">
                     <svg
                         width="10"
                         height="10"
@@ -66,7 +66,7 @@ function CartItem({imageUrl, title, type, size, price, id, count}) {
                             fill="#EB5A1E"
                         />
                     </svg>
-                </div>
+                </button>
             </div>
             <div className="cart__item-price">
                 <b>{price * count} ₽</b>
