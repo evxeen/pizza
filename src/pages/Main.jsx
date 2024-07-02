@@ -1,17 +1,18 @@
-import {useState, useEffect} from 'react';
-import axios from 'axios';
+import {useEffect} from 'react';
+
+import {useDispatch, useSelector} from "react-redux";
+import {fetchData} from "../state/slices/dataSlice";
 
 import Categories from '../components/Categories';
 import Sorting from '../components/Sorting';
 import PizzaCard from '../components/PizzaCard';
 
 function Main() {
-    const [data, setData] = useState([]);
+    const dispatch = useDispatch();
+    const {items} = useSelector(state => state.dataSlice);
 
     useEffect(() => {
-        axios.get('https://667f0707f2cb59c38dc7d61e.mockapi.io/items').then((res) => {
-            setData(res.data);
-        });
+        dispatch(fetchData());
     }, []);
 
     return (
@@ -22,7 +23,7 @@ function Main() {
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
-                {data.map((obj) => (
+                {items.map((obj) => (
                     <PizzaCard key={obj.id} {...obj} />
                 ))}
             </div>
