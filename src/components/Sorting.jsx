@@ -49,7 +49,7 @@ function Sorting() {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => setModalActive(!modalActive)}>популярности</span>
+                <span onClick={() => setModalActive(!modalActive)}>{sort.name}</span>
             </div>
             {modalActive ? (
                 <div className="sort__popup">

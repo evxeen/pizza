@@ -10,10 +10,12 @@ import PizzaCard from '../components/PizzaCard';
 function Main() {
     const dispatch = useDispatch();
     const {items} = useSelector(state => state.dataSlice);
+    const {category} = useSelector((state) => state.filterSlice);
+    const {property} = useSelector((state) => state.filterSlice.sort);
 
     useEffect(() => {
-        dispatch(fetchData());
-    }, []);
+        dispatch(fetchData({category, property}));
+    }, [category, property]);
 
     return (
         <>
