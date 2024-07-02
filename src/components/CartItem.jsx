@@ -6,7 +6,7 @@ function CartItem({imageUrl, title, type, size, price, id, count}) {
 
     const add = () => {
         dispatch(addItem({
-            id
+            id,
         }))
     }
 

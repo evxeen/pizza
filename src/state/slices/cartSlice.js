@@ -24,6 +24,8 @@ const cartSlice = createSlice({
         },
 
         removeItem(state, action) {
+            const searchElem = state.items.find(item => item.id === action.payload);
+            state.totalPrice -= searchElem.price * searchElem.count;
             state.items = state.items.filter((item) => item.id !== action.payload);
         },
 
@@ -36,7 +38,9 @@ const cartSlice = createSlice({
             const duplicateItem = state.items.find(item => item.id === action.payload);
             if (duplicateItem) {
                 duplicateItem.count--;
+                state.totalPrice -= duplicateItem.price
             }
+
         }
     },
 
