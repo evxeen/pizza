@@ -1,29 +1,31 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-export const fetchData = createAsyncThunk(
-    'data/fetchData',
-    async (params) => {
-        const sortByCategory = params.category ? `category=${params.category}` : '';
-        const {data} = await axios.get(`https://667f0707f2cb59c38dc7d61e.mockapi.io/items?${sortByCategory}&sortBy=${params.property}`);
-        return data;
-    }
-)
+export const fetchData = createAsyncThunk('data/fetchData', async (params) => {
+  const sortByCategory = params.category ? `category=${params.category}` : '';
+  const { data } = await axios.get(
+    `https://667f0707f2cb59c38dc7d61e.mockapi.io/items?${sortByCategory}&sortBy=${params.property}`,
+  );
+  return data;
+});
 const initialState = {
-    items: []
+  items: [],
 };
 
 const dataSlice = createSlice({
-    name: 'data',
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(fetchData.fulfilled, (state, action) => {
-            state.items = action.payload
-        })
-    },
+  name: 'data',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchData.fulfilled, (state, action) => {
+      state.items = action.payload;
+    });
+    builder.addCase(fetchData.rejected, (state) => {
+      state.status = 'Возникла ошибка на стороне сервера 😐';
+    });
+  },
 });
 
-export const {setData} = dataSlice.actions;
+export const { setData } = dataSlice.actions;
 
 export default dataSlice.reducer;

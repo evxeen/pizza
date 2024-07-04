@@ -4,6 +4,7 @@ import Main from './pages/Main';
 import Cart from './pages/Cart';
 
 import './scss/app.scss';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </div>
         </div>

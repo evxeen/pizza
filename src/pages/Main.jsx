@@ -7,10 +7,11 @@ import Categories from '../components/Categories';
 import Sorting from '../components/Sorting';
 import PizzaCard from '../components/PizzaCard';
 import Loader from '../components/Loader';
+import ErrorPage from './ErrorPage';
 
 function Main() {
   const dispatch = useDispatch();
-  const { items } = useSelector((state) => state.dataSlice);
+  const { items, status } = useSelector((state) => state.dataSlice);
   const { category } = useSelector((state) => state.filterSlice);
   const { property } = useSelector((state) => state.filterSlice.sort);
 
@@ -25,8 +26,12 @@ function Main() {
         <Sorting />
       </div>
       <h2 className="content__title">Все пиццы</h2>
+      {status && <ErrorPage  status={status} />}
       <div className="content__items">
-        {items.length <= 0 ? <Loader /> : items.map((obj) => <PizzaCard key={obj.id} {...obj} />)}
+        {items.length <= 0 && <Loader/>}
+        {items.map((obj) => (
+          <PizzaCard key={obj.id} {...obj} />
+        ))}
       </div>
     </>
   );
