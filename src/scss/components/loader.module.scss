@@ -1,0 +1,28 @@
+$primary-color: #3498db;
+$loader-size: 50px;
+$border-width: 8px;
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.spinner {
+  width: $loader-size;
+  height: $loader-size;
+  border: $border-width solid rgba(0, 0, 0, 0.1);
+  border-top: $border-width solid $primary-color;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
